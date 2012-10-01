@@ -18,5 +18,8 @@ public class GpsData {
 	public double getLongitude() {
 		return longitude;
 	}
+	public String toString(){
+		return longitude+","+latitude;
+	}
 	
 }

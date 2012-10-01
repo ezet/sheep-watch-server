@@ -2,6 +2,7 @@ package sw.server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Scanner;
 
@@ -97,6 +98,7 @@ public class ServerCLI {
 		simThread.interrupt();
 		simulator.stop();
 	}
+<<<<<<< HEAD
 
 	public void connectToDB() {
 		String dbURL = "";
@@ -121,6 +123,40 @@ public class ServerCLI {
 
 			con.close();
 		} catch (Exception e) {
+=======
+	public void sendToDB(Message message){
+		String dbURL="";
+		try{
+		PreparedStatement pstmt;
+		//Register the JDBC driver for MySQL.
+		 Class.forName("com.mysql.jdbc.Driver");
+		 
+		//Define URL of database server
+		 String url="jdbc:mysql:"+dbURL;
+		 
+		 //setting up connection to DB
+		 String user ="";
+		 String pw = "";
+		 Connection con = DriverManager.getConnection(url,user,pw);
+		 
+		 //Get a Statement object
+		 pstmt = con.prepareStatement("INSERT INTO message(messageid,sheepid,messagetype,timesent,timereceived,location,pulse,temprature) VALUES (?,?)");
+		 
+		 pstmt.setLong(0,message.getMessageId());
+		 pstmt.setLong(1, message.getSheepId());
+		 pstmt.setString(2,message.getType().toString());
+		 pstmt.setInt(3,message.getTimeSent());
+		 pstmt.setInt(4,message.getTimeReceived());
+		 pstmt.setString(5,message.getGpsData().toString());
+		 pstmt.setInt(6, message.getPulse());
+		 pstmt.setDouble(7, message.getTemperature());
+		 //execute
+		 pstmt.executeUpdate("INSERT something INTO something");
+		 
+		 con.close();
+		}
+		catch(Exception e){
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 }
