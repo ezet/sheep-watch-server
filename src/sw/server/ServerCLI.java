@@ -19,12 +19,11 @@ public class ServerCLI {
 
 	public static void main(String[] args) {
 		ServerCLI sc = new ServerCLI();
-		// sc.init();
+//		 sc.init();
 		sc.run();
 	}
 
 	public void init() {
-		connectToDB();
 	}
 
 	public void run() {
@@ -100,65 +99,5 @@ public class ServerCLI {
 		print("Stopping simulator...");
 		simThread.interrupt();
 		simulator.stop();
-	}
-
-	public void connectToDB() {
-		String dbURL = "";
-		try {
-			Statement stmt;
-			// Register the JDBC driver for MySQL.
-			Class.forName("com.mysql.jdbc.Driver");
-
-			// Define URL of database server
-			String url = "jdbc:mysql:" + dbURL;
-
-			// setting up connection to DB
-			String user = "";
-			String pw = "";
-			Connection con = DriverManager.getConnection(url, user, pw);
-
-			// Get a Statement object
-			stmt = con.createStatement();
-
-			// execute
-			stmt.executeUpdate("INSERT something INTO something");
-
-			con.close();
-		} catch (Exception e) { 
-		}
-	}
-	public void sendToDB(Message message){
-		String dbURL="";
-		try{
-		PreparedStatement pstmt;
-		//Register the JDBC driver for MySQL.
-		 Class.forName("com.mysql.jdbc.Driver");
-		 
-		//Define URL of database server
-		 String url="jdbc:mysql:"+dbURL;
-		 
-		 //setting up connection to DB
-		 String user ="";
-		 String pw = "";
-		 Connection con = DriverManager.getConnection(url,user,pw);
-		 
-		 //Get a Statement object
-		 pstmt = con.prepareStatement("INSERT INTO message(messageid,sheepid,messagetype,timesent,timereceived,location,pulse,temprature) VALUES (?,?)");
-		 
-		 pstmt.setLong(0,message.getMessageId());
-		 pstmt.setLong(1, message.getSheepId());
-		 pstmt.setString(2,message.getType().toString());
-		 pstmt.setInt(3,message.getTimeSent());
-		 pstmt.setInt(4,message.getTimeReceived());
-		 pstmt.setString(5,message.getGpsData().toString());
-		 pstmt.setInt(6, message.getPulse());
-		 pstmt.setDouble(7, message.getTemperature());
-		 //execute
-		 pstmt.executeUpdate("INSERT something INTO something");
-		 
-		 con.close();
-		}
-		catch(Exception e){
-		}
 	}
 }
