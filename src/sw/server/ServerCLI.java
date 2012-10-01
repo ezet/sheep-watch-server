@@ -55,6 +55,9 @@ public class ServerCLI {
 			} else if (str.equals("exit") && str.equals("quit")) {
 				stopServer();
 				run = false;
+			} else if (str.equals("status")) {
+				print("Server: " + (serverThread.isAlive() ? "running" : "stopped"));
+				print("Simulator: " + (simThread.isAlive() ? "running" : "stopped"));
 			} else if (str.equals("help")) {
 
 			} else
