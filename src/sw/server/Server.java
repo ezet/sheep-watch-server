@@ -31,11 +31,14 @@ public class Server implements Runnable {
 	}
 
 	public void processMessage(Message message) {
-		messageDao.insert(message);
-		if (message.getType() == MessageType.ALARM) {
-			// TODO process alarm
-		} else {
-
+		if (message != null) {
+			messageDao.insert(message);
+			if (message.getType() == MessageType.ALARM) {
+				// TODO process alarm
+			} else {
+				
+			}
+			
 		}
 
 	}
