@@ -98,7 +98,6 @@ public class ServerCLI {
 		simThread.interrupt();
 		simulator.stop();
 	}
-<<<<<<< HEAD
 
 	public void connectToDB() {
 		String dbURL = "";
@@ -122,8 +121,9 @@ public class ServerCLI {
 			stmt.executeUpdate("INSERT something INTO something");
 
 			con.close();
-		} catch (Exception e) {
-=======
+		} catch (Exception e) { 
+		}
+	}
 	public void sendToDB(Message message){
 		String dbURL="";
 		try{
@@ -156,7 +156,6 @@ public class ServerCLI {
 		 con.close();
 		}
 		catch(Exception e){
->>>>>>> refs/remotes/origin/master
 		}
 	}
 }
