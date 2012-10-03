@@ -59,4 +59,7 @@ public class Message {
 	public double getTemperature() {
 		return temperature;
 	}
+	public int getRfid(){
+		return 0;
+	}
 }

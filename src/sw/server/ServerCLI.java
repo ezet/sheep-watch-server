@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import sw.server.db.DBConnection;
 import sw.server.db.MessageDao;
 import sw.server.simulator.InputSimulator;
 
@@ -27,7 +28,7 @@ public class ServerCLI {
 	}
 
 	public void run() {
-		server = new Server(this, new MessageDao());
+		server = new Server(this, new MessageDao(new DBConnection()));
 		simulator = new InputSimulator(this, server.getBuffer());
 		startServer();
 		startSimulator();

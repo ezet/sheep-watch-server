@@ -35,6 +35,7 @@ public class Server implements Runnable {
 			messageDao.insert(message);
 			if (message.getType() == MessageType.ALARM) {
 				// TODO process alarm
+				messageDao.getContacts(message.getRfid());
 			} else {
 				
 			}

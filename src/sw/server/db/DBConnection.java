@@ -3,7 +3,9 @@ package sw.server.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import sw.server.Message;
 
@@ -17,6 +19,9 @@ public class DBConnection {
 		this.dburl="jdbc:mysql:"+dburl;
 		this.user=user;
 		this.password=password;
+	}
+	public DBConnection(){
+		
 	}
 	public void setUpConnection(){
 		try {
@@ -35,15 +40,28 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 	}
-	public void doQuery(){
-		PreparedStatement pstmt;
-		//vet ikke hvordan vi skal sende queriet
+	
+	public ResultSet query(String sql) {
 		try {
-			pstmt=connection.prepareStatement("",new int[42]);
+			return connection.createStatement().executeQuery(sql);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
+	
+	public boolean execute(PreparedStatement st) throws SQLException {
+		return st.execute();
+	}
+	
+	public PreparedStatement getPreparedStatement(String sql) throws SQLException {
+		return connection.prepareStatement(sql);
+	}
+	
+	public void create(String table, List data) {
+	}
+	
 	void useLessMethod(Message message){
 		try{
 		PreparedStatement pstmt;
