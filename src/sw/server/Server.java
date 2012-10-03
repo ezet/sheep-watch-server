@@ -1,7 +1,10 @@
 package sw.server;
 
+import java.util.List;
+
 import sw.server.Message.MessageType;
 import sw.server.db.MessageDao;
+import sw.server.db.User;
 
 public class Server implements Runnable {
 
@@ -34,8 +37,10 @@ public class Server implements Runnable {
 		if (message != null) {
 			messageDao.insert(message);
 			if (message.getType() == MessageType.ALARM) {
-				// TODO process alarm
-				messageDao.getContacts(message.getRfid());
+				List<User> users = messageDao.getContacts((int)message.getRfid());
+				for (User user : users) {
+					//contact em!!
+				}
 			} else {
 				
 			}
