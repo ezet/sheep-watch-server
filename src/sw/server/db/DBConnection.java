@@ -61,37 +61,4 @@ public class DBConnection {
 	
 	public void create(String table, List data) {
 	}
-	
-	void useLessMethod(Message message){
-		try{
-		PreparedStatement pstmt;
-		//Register the JDBC driver for MySQL.
-		//ikke nødvendig lenger?
-		 Class.forName("com.mysql.jdbc.Driver");
-		 
-		//Define URL of database server
-		 String url="jdbc:mysql:"+dburl;
-		 
-		 //setting up connection to DB
-		 Connection con = DriverManager.getConnection(dburl,user,password);
-		 
-		 //Get a Statement object
-		 pstmt = con.prepareStatement("INSERT INTO message(messageid,sheepid,messagetype,timesent,timereceived,location,pulse,temprature) VALUES (?,?)");
-		 
-		 pstmt.setLong(0,message.getMessageId());
-		 pstmt.setLong(1, message.getSheepId());
-		 pstmt.setString(2,message.getType().toString());
-		 pstmt.setInt(3,message.getTimeSent());
-		 pstmt.setInt(4,message.getTimeReceived());
-		 pstmt.setString(5,message.getGpsData().toString());
-		 pstmt.setInt(6, message.getPulse());
-		 pstmt.setDouble(7, message.getTemperature());
-		 //execute
-		 pstmt.executeUpdate("INSERT something INTO something");
-		 
-		 con.close();
-		}
-		catch(Exception e){
-		}
-	}
 }

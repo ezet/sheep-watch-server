@@ -7,7 +7,7 @@ public class Message {
 	};
 
 	private final long messageId;
-	private final long sheepId;
+	private final long rfid;
 	private final MessageType type;
 	private final int timeSent;
 	private final int timeReceived;
@@ -19,7 +19,7 @@ public class Message {
 			int pulse, double temperature) {
 		super();
 		this.messageId = messageId;
-		this.sheepId = sheepId;
+		this.rfid = sheepId;
 		this.type = type;
 		this.timeSent = timeSent;
 		this.timeReceived = timeReceived;
@@ -32,8 +32,8 @@ public class Message {
 		return messageId;
 	}
 
-	public long getSheepId() {
-		return sheepId;
+	public long getRfid() {
+		return rfid;
 	}
 
 	public MessageType getType() {
@@ -58,8 +58,5 @@ public class Message {
 
 	public double getTemperature() {
 		return temperature;
-	}
-	public int getRfid(){
-		return 0;
 	}
 }
