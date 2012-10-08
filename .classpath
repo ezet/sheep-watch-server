@@ -7,5 +7,6 @@
 			<attribute name="javadoc_location" value="file:/${env.MYSQL_CONNECTOR}/docs/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Sheep Watch"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

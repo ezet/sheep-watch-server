@@ -3,7 +3,8 @@ package sw.server;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import sw.server.model.Message;
+import models.Message;
+
 
 public class MessageBuffer {
 

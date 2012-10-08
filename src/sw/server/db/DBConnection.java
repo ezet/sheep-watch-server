@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import sw.server.model.Message;
+import models.Message;
+
 
 public class DBConnection {
 	String dburl;

@@ -1,8 +1,8 @@
 package sw.server.simulator;
 
-import sw.server.model.GpsData;
-import sw.server.model.Message;
-import sw.server.model.Message.MessageType;
+import models.GpsData;
+import models.Message;
+import models.Message.MessageType;
 import sw.server.MessageBuffer;
 import sw.server.ServerCLI;
 

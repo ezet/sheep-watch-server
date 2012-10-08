@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import sw.server.model.Contact;
-import sw.server.model.Message;
-import sw.server.model.User;
+import models.Contact;
+import models.Message;
+import models.User;
+
 
 public class MessageDao {
 	private DBConnection connection; 
