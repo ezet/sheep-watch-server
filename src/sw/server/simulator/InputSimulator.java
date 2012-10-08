@@ -13,9 +13,8 @@ public class InputSimulator implements Runnable {
 	private volatile MessageBuffer buffer;
 	private int nOfDailyUpdates = 3;
 	private int nOfSheep = 10000;
-	private int alarmInterval = 30; // hours
 
-	private long sheepId;
+	private long rfid;
 	private long msgId;
 
 	public InputSimulator(ServerCLI ui, MessageBuffer buffer) {
@@ -36,6 +35,14 @@ public class InputSimulator implements Runnable {
 			}
 		}
 	}
+	
+	public void alert() {
+		buffer.put(generateAlert());
+	}
+	
+	private Message generateAlert() {
+		return new Message(msgId++, rfid, MessageType.UPDATE, 0, 0, new GpsData(), 0, 0);
+	}
 
 	public long getUpdateInterval() {
 		return 3600000 / (nOfSheep * nOfDailyUpdates) / 24;
@@ -46,7 +53,7 @@ public class InputSimulator implements Runnable {
 	}
 
 	private Message generateMessage() {
-		return new Message(msgId++, sheepId++, MessageType.UPDATE, 0, 0, new GpsData(), 0, 0);
+		return new Message(msgId++, rfid++, MessageType.UPDATE, 0, 0, new GpsData(), 0, 0);
 	}
 
 }

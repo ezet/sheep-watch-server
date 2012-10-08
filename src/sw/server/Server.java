@@ -37,7 +37,7 @@ public class Server implements Runnable {
 		if (message != null) {
 			messageDao.insert(message);
 			if (message.getType() == MessageType.ALARM) {
-				List<User> users = messageDao.getContacts((int)message.getRfid());
+				List<User> users = messageDao.getContacts(message.getRfid());
 				for (User user : users) {
 					//contact em!!
 				}

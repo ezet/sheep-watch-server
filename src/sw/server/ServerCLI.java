@@ -59,7 +59,8 @@ public class ServerCLI {
 				print("Server: " + (serverThread.isAlive() ? "running" : "stopped"));
 				print("Simulator: " + (simThread.isAlive() ? "running" : "stopped"));
 			} else if (str.equals("help")) {
-
+			} else if(str.equals("sim alert")) {
+				simulator.alert();
 			} else
 				System.out.println("invalid command, try 'help' for help.");
 		}
