@@ -1,4 +1,4 @@
-package sw.server;
+package sw.server.model;
 
 public class GpsData {
 	private double latitude;//positive north for equator, negative south

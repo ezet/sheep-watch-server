@@ -1,4 +1,5 @@
-package sw.server;
+package sw.server.model;
+
 
 public class Message {
 

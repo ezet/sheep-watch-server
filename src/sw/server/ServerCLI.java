@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 import sw.server.db.DBConnection;
 import sw.server.db.MessageDao;
-import sw.server.simulator.InputSimulator;
+import sw.server.simulator.MessageSimulator;
 
 public class ServerCLI {
 
 	private Server server;
 	private Thread serverThread;
-	private InputSimulator simulator;
+	private MessageSimulator simulator;
 	private Thread simThread;
 	private boolean run;
 
@@ -21,7 +21,7 @@ public class ServerCLI {
 
 	public void run() {
 		server = new Server(this, new MessageDao(new DBConnection()));
-		simulator = new InputSimulator(this, server.getBuffer());
+		simulator = new MessageSimulator(this, server.getBuffer());
 		startServer();
 		startSimulator();
 

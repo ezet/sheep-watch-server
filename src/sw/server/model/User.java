@@ -1,4 +1,5 @@
-package sw.server.db;
+package sw.server.model;
+
 
 public class User {
 	private long userId;

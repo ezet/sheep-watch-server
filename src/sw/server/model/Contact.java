@@ -1,4 +1,4 @@
-package sw.server.db;
+package sw.server.model;
 
 public class Contact {
 	private String name;

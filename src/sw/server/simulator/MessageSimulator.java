@@ -1,12 +1,12 @@
 package sw.server.simulator;
 
-import sw.server.GpsData;
-import sw.server.Message;
-import sw.server.Message.MessageType;
+import sw.server.model.GpsData;
+import sw.server.model.Message;
+import sw.server.model.Message.MessageType;
 import sw.server.MessageBuffer;
 import sw.server.ServerCLI;
 
-public class InputSimulator implements Runnable {
+public class MessageSimulator implements Runnable {
 
 	private ServerCLI ui;
 	volatile private boolean run;
@@ -17,7 +17,7 @@ public class InputSimulator implements Runnable {
 	private long rfid;
 	private long msgId;
 
-	public InputSimulator(ServerCLI ui, MessageBuffer buffer) {
+	public MessageSimulator(ServerCLI ui, MessageBuffer buffer) {
 		this.buffer = buffer;
 		this.ui = ui;
 	}

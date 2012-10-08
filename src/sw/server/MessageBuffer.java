@@ -3,6 +3,8 @@ package sw.server;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import sw.server.model.Message;
+
 public class MessageBuffer {
 
 	private volatile BlockingQueue<Message> buffer = new ArrayBlockingQueue<Message>(200);
