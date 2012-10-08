@@ -36,7 +36,7 @@ public class MessageDao {
 		}
 	}
 	
-	public List<User> getContacts(int rfid) {
+	public List<User> getContacts(long rfid) {
 		List<User> users = new ArrayList<User>();
 		try {
 			ResultSet query = connection.query("SELECT producerId FROM Sheep WHERE rfid="+rfid);
