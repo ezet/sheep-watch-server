@@ -1,9 +1,5 @@
 package sw.server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.Scanner;
 
 import sw.server.db.DBConnection;
@@ -20,11 +16,7 @@ public class ServerCLI {
 
 	public static void main(String[] args) {
 		ServerCLI sc = new ServerCLI();
-//		 sc.init();
 		sc.run();
-	}
-
-	public void init() {
 	}
 
 	public void run() {
@@ -32,8 +24,6 @@ public class ServerCLI {
 		simulator = new InputSimulator(this, server.getBuffer());
 		startServer();
 		startSimulator();
-
-		// init input simulator
 
 		Scanner scanner = new Scanner(System.in);
 		run = true;
