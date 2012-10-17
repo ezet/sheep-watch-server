@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="MYSQL_CONNECTOR/mysql-connector-java-5.1.18-bin.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/${env.MYSQL_CONNECTOR}/docs/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Sheep Watch"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MYSQL_CONNECTOR"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
