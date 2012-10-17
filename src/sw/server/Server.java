@@ -2,11 +2,10 @@ package sw.server;
 
 import java.util.List;
 
-import models.Message;
-import models.User;
-import models.Message.MessageType;
-
 import sw.server.db.MessageDao;
+import sw.server.models.Message;
+import sw.server.models.Message.MessageType;
+import sw.server.models.User;
 
 public class Server implements Runnable {
 

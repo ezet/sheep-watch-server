@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Contact;
-import models.Message;
-import models.User;
+import sw.server.models.Contact;
+import sw.server.models.Message;
+import sw.server.models.User;
 
 
 public class MessageDao {

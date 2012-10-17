@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import models.Message;
-
-
 public class DBConnection {
 	String dburl;
 	String user;

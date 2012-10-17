@@ -3,8 +3,7 @@ package sw.server;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import models.Message;
-
+import sw.server.models.Message;
 
 public class MessageBuffer {
 
@@ -17,7 +16,7 @@ public class MessageBuffer {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			System.out.println("interrupt");
-//			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return message;
 	}
@@ -27,7 +26,7 @@ public class MessageBuffer {
 			buffer.put(message);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 
