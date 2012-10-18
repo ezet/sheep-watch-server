@@ -3,8 +3,9 @@ package sw.server;
 import java.util.List;
 
 import sw.server.db.MessageDao;
+import sw.server.models.Event;
+import sw.server.models.Event.MessageType;
 import sw.server.models.Message;
-import sw.server.models.Message.MessageType;
 import sw.server.models.User;
 
 public class Server implements Runnable {
@@ -36,9 +37,11 @@ public class Server implements Runnable {
 
 	public void processMessage(Message message) {
 		if (message != null) {
-			messageDao.insert(message);
-			if (message.getType() == MessageType.ALARM) {
-				List<User> users = messageDao.getContacts(message.getRfid());
+			Event event = new Event(message);
+
+			messageDao.insert(event);
+			if (event.getType() == MessageType.ALARM) {
+				List<User> users = messageDao.getContacts(event.getRfid());
 				for (User user : users) {
 					// contact em!!
 				}

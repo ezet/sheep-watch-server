@@ -2,9 +2,7 @@ package sw.server.simulator;
 
 import sw.server.MessageBuffer;
 import sw.server.ServerCLI;
-import sw.server.models.GpsData;
 import sw.server.models.Message;
-import sw.server.models.Message.MessageType;
 
 public class MessageSimulator implements Runnable {
 
@@ -35,13 +33,13 @@ public class MessageSimulator implements Runnable {
 			}
 		}
 	}
-	
+
 	public void alert() {
 		buffer.put(generateAlert());
 	}
-	
+
 	private Message generateAlert() {
-		return new Message(msgId++, 0, rfid, MessageType.UPDATE, 0, 0, new GpsData(), 0, 0);
+		return new Message(msgId++, rfid, 0, 0, 0, 0, 0, 0);
 	}
 
 	public long getUpdateInterval() {
@@ -53,7 +51,7 @@ public class MessageSimulator implements Runnable {
 	}
 
 	private Message generateMessage() {
-		return new Message(msgId++, 0, rfid++, MessageType.UPDATE, 0, 0, new GpsData(), 0, 0);
+		return new Message(msgId++, rfid++, 0, 0, 0, 0, 0, 0);
 	}
 
 }

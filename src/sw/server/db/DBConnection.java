@@ -5,32 +5,34 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class DBConnection {
 	String dburl;
 	String user;
 	String password;
 	Connection connection;
-	
-	public DBConnection(String dburl, String user, String password){
-		this.dburl="jdbc:mysql:"+dburl;
-		this.user=user;
-		this.password=password;
+
+	public DBConnection(String dburl, String user, String password) {
+		this.dburl = "jdbc:mysql:" + dburl;
+		this.user = user;
+		this.password = password;
 	}
-	public DBConnection(){
-		
+
+	public DBConnection() {
+
 	}
-	public void setUpConnection(){
+
+	public void setUpConnection() {
 		try {
-			connection = DriverManager.getConnection(dburl,user,password);
-			
+			connection = DriverManager.getConnection(dburl, user, password);
+
 		} catch (SQLException e) {
 			System.out.println("Wrong url, user and/or password");
 			e.printStackTrace();
 		}
 	}
-	public void closeConnection(){
+
+	public void closeConnection() {
 		try {
 			connection.close();
 		} catch (SQLException e) {
@@ -38,7 +40,7 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ResultSet query(String sql) {
 		try {
 			return connection.createStatement().executeQuery(sql);
@@ -48,15 +50,13 @@ public class DBConnection {
 		}
 		return null;
 	}
-	
+
 	public boolean execute(PreparedStatement st) throws SQLException {
 		return st.execute();
 	}
-	
+
 	public PreparedStatement getPreparedStatement(String sql) throws SQLException {
 		return connection.prepareStatement(sql);
 	}
-	
-	public void create(String table, List data) {
-	}
+
 }

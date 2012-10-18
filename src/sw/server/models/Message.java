@@ -1,41 +1,29 @@
 package sw.server.models;
 
 public class Message {
+	private final long id;
+	private final long rfid;
+	private final int messageType;
+	private final long timeSent;
+	private final int pulse;
+	private final double temperature;
+	private final long latitude;
+	private final long longitude;
 
-	public enum MessageType {
-		UPDATE, ALARM, EXCEPTION
-	};
-
-	public final long id;
-
-	public final long producerId;
-
-	public final long rfid;
-
-	public Sheep sheep;
-
-	public final MessageType type;
-	public final int timeSent;
-	public final int timeReceived;
-	public final GpsData gpsData;
-	public final int pulse;
-	public final double temperature;
-
-	public Message(long id, long producerId, long rfid, MessageType type, int timeSent, int timeReceived,
-			GpsData gpsData, int pulse, double temperature) {
+	public Message(long id, long rfid, int messageType, long timeSent, long longitude, long latitude, int pulse,
+			double temperature) {
 		super();
 		this.id = id;
-		this.producerId = producerId;
 		this.rfid = rfid;
-		this.type = type;
+		this.messageType = messageType;
 		this.timeSent = timeSent;
-		this.timeReceived = timeReceived;
-		this.gpsData = gpsData;
 		this.pulse = pulse;
 		this.temperature = temperature;
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
-	
-	public long getMessageId() {
+
+	public long getId() {
 		return id;
 	}
 
@@ -43,20 +31,12 @@ public class Message {
 		return rfid;
 	}
 
-	public MessageType getType() {
-		return type;
+	public int getMessageType() {
+		return messageType;
 	}
 
-	public int getTimeSent() {
+	public long getTimeSent() {
 		return timeSent;
-	}
-
-	public int getTimeReceived() {
-		return timeReceived;
-	}
-
-	public GpsData getGpsData() {
-		return gpsData;
 	}
 
 	public int getPulse() {
@@ -66,4 +46,13 @@ public class Message {
 	public double getTemperature() {
 		return temperature;
 	}
+
+	public long getLongitude() {
+		return longitude;
+	}
+
+	public long getLatitude() {
+		return latitude;
+	}
+
 }
