@@ -1,5 +1,7 @@
 package sw.server.models;
 
+import java.util.Calendar;
+
 public class Message {
 	private final long id;
 	private final long rfid;
@@ -10,17 +12,17 @@ public class Message {
 	private final long latitude;
 	private final long longitude;
 
-	public Message(long id, long rfid, int messageType, long timeSent, long longitude, long latitude, int pulse,
+	public Message(long id, long rfid, int messageType, long longitude, long latitude, int pulse,
 			double temperature) {
 		super();
 		this.id = id;
 		this.rfid = rfid;
 		this.messageType = messageType;
-		this.timeSent = timeSent;
 		this.pulse = pulse;
 		this.temperature = temperature;
 		this.longitude = longitude;
 		this.latitude = latitude;
+		this.timeSent = Calendar.getInstance().getTimeInMillis();
 	}
 
 	public long getId() {

@@ -1,83 +1,128 @@
 package sw.server.models;
 
+import java.util.Date;
+
 public class Event {
 
 	public enum MessageType {
-		UPDATE, ALARM, EXCEPTION
+		UPDATE(0), ALARM(1), EXCEPTION(2);
+		
+		public final int index;
+		
+		private MessageType(int n) {
+			index = n;
+		}
+		
+		public static MessageType valueOf(int n) {
+			MessageType type = null;
+			if (n == 0) {
+				type = MessageType.UPDATE;
+			} else if (n == 1) {
+				type = MessageType.ALARM;
+			} else if (n == 2) {
+				type = MessageType.EXCEPTION;
+			}
+			return type;
+		}
 	};
 
-	public final long messageId;
+	public long id;
 
-	public final long rfid;
+	public long rfid;
 
-	public final MessageType type;
-	public final long timeSent;
-	public final long timeReceived;
-	public final int pulse;
-	public final double temperature;
-	public final long latitude;
-	public final long longitude;
+	public MessageType messageType;
+	public Date timeSent;
+	public Date timeReceived;
+	public int pulse;
+	public double temperature;
+	public long latitude;
+	public long longitude;
 
 	public Event(Message message) {
-		this.messageId = message.getId();
+		this.id = message.getId();
 		this.rfid = message.getRfid();
-		this.type = MessageType.valueOf(String.valueOf(message.getMessageType()));
-		this.timeSent = message.getTimeSent();
-		this.timeReceived = 0;
+		this.messageType = MessageType.valueOf(message.getMessageType());
+		this.timeSent = new Date(message.getTimeSent());
+		this.timeReceived = new Date();
 		this.pulse = message.getPulse();
 		this.temperature = message.getTemperature();
 		this.latitude = message.getLatitude();
 		this.longitude = message.getLongitude();
 	}
 
-	public Event(long messageId, long rfid, MessageType type, int timeSent, int timeReceived, int pulse,
-			double temperature, long latitude, long longitude) {
-		super();
-		this.messageId = messageId;
-		this.rfid = rfid;
-		this.type = type;
-		this.timeSent = timeSent;
-		this.timeReceived = timeReceived;
-		this.pulse = pulse;
-		this.temperature = temperature;
-		this.latitude = latitude;
-		this.longitude = longitude;
+	public long getId() {
+		return id;
 	}
 
-	public long getMessageId() {
-		return messageId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public long getRfid() {
 		return rfid;
 	}
 
-	public MessageType getType() {
-		return type;
+	public void setRfid(long rfid) {
+		this.rfid = rfid;
 	}
 
-	public long getTimeSent() {
+	public MessageType getMessageType() {
+		return messageType;
+	}
+
+	public void setMessageType(MessageType messageType) {
+		this.messageType = messageType;
+	}
+
+	public Date getTimeSent() {
 		return timeSent;
 	}
 
-	public long getTimeReceived() {
+	public void setTimeSent(Date timeSent) {
+		this.timeSent = timeSent;
+	}
+
+	public Date getTimeReceived() {
 		return timeReceived;
+	}
+
+	public void setTimeReceived(Date timeReceived) {
+		this.timeReceived = timeReceived;
 	}
 
 	public int getPulse() {
 		return pulse;
 	}
 
+	public void setPulse(int pulse) {
+		this.pulse = pulse;
+	}
+
 	public double getTemperature() {
 		return temperature;
+	}
+
+	public void setTemperature(double temperature) {
+		this.temperature = temperature;
 	}
 
 	public long getLatitude() {
 		return latitude;
 	}
 
+	public void setLatitude(long latitude) {
+		this.latitude = latitude;
+	}
+
 	public long getLongitude() {
 		return longitude;
 	}
+
+	public void setLongitude(long longitude) {
+		this.longitude = longitude;
+	}
+
+	
+	
 
 }

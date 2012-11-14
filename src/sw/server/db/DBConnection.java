@@ -1,62 +1,110 @@
 package sw.server.db;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import sw.server.Logger;
+
 
 public class DBConnection {
-	String dburl;
-	String user;
-	String password;
-	Connection connection;
 
-	public DBConnection(String dburl, String user, String password) {
-		this.dburl = "jdbc:mysql:" + dburl;
-		this.user = user;
-		this.password = password;
+	private String dbAddress = "localhost/";
+	private String jdbcDriver = "jdbc:mysql://";
+	private String database = "larskrid_sw";
+	private Connection conn = null;
+	private Properties props = new Properties();
+
+	private static DBConnection instance;
+
+	public static DBConnection getInstance() {
+		return instance = (instance == null) ? new DBConnection() : instance;
 	}
 
 	public DBConnection() {
-
+		props.setProperty("user", "dev");
+		props.setProperty("password", "dev");
 	}
 
-	public void setUpConnection() {
-		try {
-			connection = DriverManager.getConnection(dburl, user, password);
 
+	public Statement getStatement() throws SQLException {
+		connect();
+		Statement st = null;
+		try {
+			st = conn.createStatement();
 		} catch (SQLException e) {
-			System.out.println("Wrong url, user and/or password");
-			e.printStackTrace();
+			Logger.log(e);
+			throw e;
+		}
+		return st;
+	}
+
+	public PreparedStatement prepareStatement(String sql) throws SQLException {
+		connect();
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		} catch (Exception e) {
+			Logger.log(e);
+			throw e;
+		}
+		return st;
+	}
+	
+	public void close(PreparedStatement st) {
+		close((Statement) st);
+	}
+	
+	public void close(Statement st) {
+		try {
+			if (st != null) {
+				st.close();
+			}
+		} catch (SQLException e) {
+			Logger.log(e);
+		}
+	}
+	
+	public void close(Statement st, ResultSet rs) {
+		close(conn, st, rs);
+	}
+
+	public void close(Connection conn, Statement st, ResultSet rs) {
+		try {
+			if (rs != null)
+				rs.close();
+			if (st != null)
+				st.close();
+//			if (conn != null)
+//				conn.close();
+		} catch (Exception e) {
+			Logger.log(e);
 		}
 	}
 
-	public void closeConnection() {
+	public void close() {
 		try {
-			connection.close();
+		conn.close();
 		} catch (SQLException e) {
-			System.out.println("You can't just cut me off!!");
-			e.printStackTrace();
+			Logger.log(e);
 		}
 	}
-
-	public ResultSet query(String sql) {
+	
+	private void connect() throws SQLException {
 		try {
-			return connection.createStatement().executeQuery(sql);
+			if (conn == null || conn.isClosed()) {
+				conn = DriverManager.getConnection(jdbcDriver + dbAddress + database, props);
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.log("Cannot connect to db.");
+			Logger.log(e);
+			throw e;
 		}
-		return null;
-	}
-
-	public boolean execute(PreparedStatement st) throws SQLException {
-		return st.execute();
-	}
-
-	public PreparedStatement getPreparedStatement(String sql) throws SQLException {
-		return connection.prepareStatement(sql);
 	}
 
 }

@@ -3,7 +3,7 @@ package sw.server;
 import java.util.Scanner;
 
 import sw.server.db.DBConnection;
-import sw.server.db.MessageDao;
+import sw.server.db.EventDao;
 import sw.server.simulator.MessageSimulator;
 
 public class ServerCLI {
@@ -20,7 +20,7 @@ public class ServerCLI {
 	}
 
 	public void run() {
-		server = new Server(this, new MessageDao(new DBConnection()));
+		server = new Server(this, new EventDao());
 		simulator = new MessageSimulator(this, server.getBuffer());
 		startServer();
 		startSimulator();

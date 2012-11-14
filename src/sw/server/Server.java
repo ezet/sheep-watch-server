@@ -2,7 +2,8 @@ package sw.server;
 
 import java.util.List;
 
-import sw.server.db.MessageDao;
+import sw.server.db.EventDao;
+import sw.server.models.Contact;
 import sw.server.models.Event;
 import sw.server.models.Event.MessageType;
 import sw.server.models.Message;
@@ -13,9 +14,9 @@ public class Server implements Runnable {
 	private volatile boolean run;
 	private volatile MessageBuffer buffer = new MessageBuffer();
 	private ServerCLI ui;
-	private MessageDao messageDao;
+	private EventDao messageDao;
 
-	public Server(ServerCLI ui, MessageDao messageDao) {
+	public Server(ServerCLI ui, EventDao messageDao) {
 		this.ui = ui;
 		this.messageDao = messageDao;
 	}
@@ -38,11 +39,12 @@ public class Server implements Runnable {
 	public void processMessage(Message message) {
 		if (message != null) {
 			Event event = new Event(message);
-
+			
 			messageDao.insert(event);
-			if (event.getType() == MessageType.ALARM) {
-				List<User> users = messageDao.getContacts(event.getRfid());
-				for (User user : users) {
+			System.out.println("Message processed.");
+			if (event.getMessageType() == MessageType.ALARM) {
+				List<Contact> contacts = messageDao.getContacts(event.getRfid());
+				for (Contact contact: contacts) {
 					// contact em!!
 				}
 			} else {

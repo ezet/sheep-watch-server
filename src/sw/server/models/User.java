@@ -1,44 +1,41 @@
 package sw.server.models;
 
+import java.util.Date;
 
 public class User {
 
-	public long id;
+	private long id;
+	private long producerId;
+	private String username;
+	private String password;
+	private String name;
+	private int accessLevel;
+	private Date timeCreated;
 
-	public final long producerId;
-
-	public String username;
-
-	public String password;
-
-	public int timeCreated;
-	public boolean isAdmin;
-	public Contact contactInfo;
-
-	public User() {
-		producerId = 0;
-	}
-
-	public User(long producerId, Contact contactInfo) {
-		this.contactInfo = contactInfo;
-		this.producerId = producerId;
-	}
-
-	public User(long id, long producerId, String username, String password, int timeCreated, boolean isAdmin) {
-		this.id = id;
+	public User(long producerId, String username, String password, String name, int accessLevel) {
+		super();
 		this.producerId = producerId;
 		this.username = username;
 		this.password = password;
-		this.timeCreated = timeCreated;
-		this.isAdmin = isAdmin;
+		this.name = name;
+		this.accessLevel = accessLevel;
 	}
-
+	
 	public long getId() {
 		return id;
 	}
 
+
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getProducerId() {
+		return producerId;
+	}
+
+	public void setProducerId(long producerId) {
+		this.producerId = producerId;
 	}
 
 	public String getUsername() {
@@ -57,32 +54,28 @@ public class User {
 		this.password = password;
 	}
 
-	public int getTimeCreated() {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAccessLevel() {
+		return accessLevel;
+	}
+
+	public void setAccessLevel(int accessLevel) {
+		this.accessLevel = accessLevel;
+	}
+
+	public Date getTimeCreated() {
 		return timeCreated;
 	}
 
-	public void setTimeCreated(int timeCreated) {
+	public void setTimeCreated(Date timeCreated) {
 		this.timeCreated = timeCreated;
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
-	public Contact getContactInfo() {
-		return contactInfo;
-	}
-
-	public void setContactInfo(Contact contactInfo) {
-		this.contactInfo = contactInfo;
-	}
-
-	public long getProducerId() {
-		return producerId;
 	}
 
 	public String toString() {
