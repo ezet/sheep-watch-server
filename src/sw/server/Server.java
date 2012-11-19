@@ -2,12 +2,14 @@ package sw.server;
 
 import java.util.List;
 
+import sw.server.db.ContactDao;
 import sw.server.db.EventDao;
 import sw.server.db.SheepDao;
 import sw.server.models.Contact;
 import sw.server.models.Event;
 import sw.server.models.Event.MessageType;
 import sw.server.models.Message;
+import sw.server.models.Sheep;
 
 public class Server implements Runnable {
 
@@ -16,11 +18,13 @@ public class Server implements Runnable {
 	private ServerCLI ui;
 	private EventDao eventDao;
 	private SheepDao sheepDao;
+	private ContactDao contactDao;
 
 	public Server(ServerCLI ui, EventDao messageDao) {
 		this.ui = ui;
 		this.eventDao = messageDao;
 		this.sheepDao = new SheepDao();
+		this.contactDao = new ContactDao();
 	}
 
 	public void run() {
@@ -42,11 +46,13 @@ public class Server implements Runnable {
 		if (message != null) {
 			Event event = new Event(message);
 			long sheepId = sheepDao.findByRfid(event.getRfid());
+			Sheep sheep = new Sheep();
 			event.setSheepId(sheepId);
 			eventDao.insert(event);
 			if (event.getMessageType() == MessageType.ALARM) {
-				List<Contact> contacts = eventDao.getContacts(event.getRfid());
+				List<Contact> contacts = contactDao.findByUserId(sheep.getUserId());
 				for (Contact contact: contacts) {
+					
 					// contact em!!
 				}
 			} else {

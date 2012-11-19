@@ -30,6 +30,11 @@ public class Sheep {
 	}
 
 
+	public Sheep() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public long getId() {
 		return id;
 	}
