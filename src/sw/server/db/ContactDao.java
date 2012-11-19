@@ -3,16 +3,14 @@ package sw.server.db;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import sw.server.Logger;
 import sw.server.models.Contact;
-import sw.server.models.Sheep;
 
 public class ContactDao extends Dao {
-	
+
 	public List<Contact> findByUserId(long userId) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -22,7 +20,7 @@ public class ContactDao extends Dao {
 			st = db.prepareStatement("SELECT * FROM contact WHERE user_id = " + userId + ';');
 			rs = st.executeQuery();
 			while (rs.next()) {
-				
+
 			}
 			if (rs.next()) {
 				contacts.add(getContact(rs));
@@ -35,7 +33,7 @@ public class ContactDao extends Dao {
 		}
 		return contacts;
 	}
-	
+
 	private Contact getContact(ResultSet rs) throws SQLException {
 		Contact contact = new Contact();
 		contact.setId(rs.getLong("id"));
@@ -49,5 +47,4 @@ public class ContactDao extends Dao {
 		contact.setUpdTime(rs.getTimestamp("upd_time"));
 		return contact;
 	}
-	
 }
