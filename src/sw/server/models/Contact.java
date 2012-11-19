@@ -15,6 +15,15 @@ public class Contact {
 	private Date creTime;
 	private Date updTime;
 	
+	public Contact(String name, String email){
+		this.name=name;
+		this.email=email;
+		this.emailAlert=true;
+	}
+	public Contact(){
+		
+	}
+	
 	public long getId() {
 		return id;
 	}

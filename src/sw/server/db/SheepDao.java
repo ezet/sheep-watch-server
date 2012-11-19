@@ -38,7 +38,7 @@ public class SheepDao extends Dao {
 			ResultSet rs = null;
 			Sheep sheep = null;
 			try {
-				st = db.prepareStatement("SELECT id FROM sheep WHERE rfid = " + rfid + ';');
+				st = db.prepareStatement("SELECT * FROM sheep WHERE rfid = " + rfid + ';');
 				rs = st.executeQuery();
 				if (rs.next()) {
 					sheep = createSheep(rs);
