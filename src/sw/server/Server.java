@@ -3,22 +3,24 @@ package sw.server;
 import java.util.List;
 
 import sw.server.db.EventDao;
+import sw.server.db.SheepDao;
 import sw.server.models.Contact;
 import sw.server.models.Event;
 import sw.server.models.Event.MessageType;
 import sw.server.models.Message;
-import sw.server.models.User;
 
 public class Server implements Runnable {
 
 	private volatile boolean run;
 	private volatile MessageBuffer buffer = new MessageBuffer();
 	private ServerCLI ui;
-	private EventDao messageDao;
+	private EventDao eventDao;
+	private SheepDao sheepDao;
 
 	public Server(ServerCLI ui, EventDao messageDao) {
 		this.ui = ui;
-		this.messageDao = messageDao;
+		this.eventDao = messageDao;
+		this.sheepDao = new SheepDao();
 	}
 
 	public void run() {
@@ -39,20 +41,17 @@ public class Server implements Runnable {
 	public void processMessage(Message message) {
 		if (message != null) {
 			Event event = new Event(message);
-			
-			messageDao.insert(event);
-			System.out.println("Message processed.");
+			long sheepId = sheepDao.findByRfid(event.getRfid());
+			event.setSheepId(sheepId);
+			eventDao.insert(event);
 			if (event.getMessageType() == MessageType.ALARM) {
-				List<Contact> contacts = messageDao.getContacts(event.getRfid());
+				List<Contact> contacts = eventDao.getContacts(event.getRfid());
 				for (Contact contact: contacts) {
 					// contact em!!
 				}
 			} else {
 
 			}
-
 		}
-
 	}
-
 }

@@ -31,33 +31,36 @@ public class ServerCLI {
 				prompt();
 				String str = scanner.nextLine();
 				if (str.equals("server start")) {
-					if (!serverThread.isAlive())
+					if (serverThread == null || !serverThread.isAlive())
 						startServer();
 				} else if (str.equals("server stop")) {
-					if (serverThread.isAlive())
+					if (serverThread != null && serverThread.isAlive())
 						stopServer();
 				} else if (str.equals("sim start")) {
-					if (!simThread.isAlive())
+					if (simThread == null || !simThread.isAlive())
 						startSimulator();
 				} else if (str.equals("sim stop")) {
-					if (simThread.isAlive())
+					if (simThread != null && simThread.isAlive())
 						stopSimulator();
 				} else if (str.equals("exit") && str.equals("quit")) {
 					stopServer();
 					run = false;
 				} else if (str.equals("status")) {
-					print("Server: " + (serverThread.isAlive() ? "running" : "stopped"));
-					print("Simulator: " + (simThread.isAlive() ? "running" : "stopped"));
+					print("Server: " + (serverThread != null && serverThread.isAlive() ? "running" : "stopped"));
+					print("Simulator: " + (simThread != null && simThread.isAlive() ? "running" : "stopped"));
 				} else if (str.equals("help")) {
-				} else if (str.equals("sim alert")) {
-					simulator.alert();
+				} else if (str.equals("sim alarm")) {
+					System.out.println("Enter RFID: ");
+					int rfid = scanner.nextInt();
+					scanner.nextLine();
+					simulator.alarm(rfid);
 				} else
 					System.out.println("invalid command, try 'help' for help.");
 			}
 		}
 	}
 
-	private void prompt() {
+	public void prompt() {
 		System.out.print("sheepwatch:> ");
 	}
 

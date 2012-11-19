@@ -29,21 +29,23 @@ public class Event {
 	public long id;
 
 	public long rfid;
+	
+	public long sheepId;
 
 	public MessageType messageType;
 	public Date timeSent;
 	public Date timeReceived;
 	public int pulse;
 	public double temperature;
-	public long latitude;
-	public long longitude;
+	public double latitude;
+	public double longitude;
 
 	public Event(Message message) {
 		this.id = message.getId();
 		this.rfid = message.getRfid();
 		this.messageType = MessageType.valueOf(message.getMessageType());
 		this.timeSent = new Date(message.getTimeSent());
-		this.timeReceived = new Date();
+		this.timeReceived = new Date(System.currentTimeMillis());
 		this.pulse = message.getPulse();
 		this.temperature = message.getTemperature();
 		this.latitude = message.getLatitude();
@@ -56,6 +58,22 @@ public class Event {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public long getSheepId() {
+		return sheepId;
+	}
+
+	public void setSheepId(long sheepId) {
+		this.sheepId = sheepId;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public long getRfid() {
@@ -106,7 +124,7 @@ public class Event {
 		this.temperature = temperature;
 	}
 
-	public long getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
@@ -114,7 +132,7 @@ public class Event {
 		this.latitude = latitude;
 	}
 
-	public long getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 

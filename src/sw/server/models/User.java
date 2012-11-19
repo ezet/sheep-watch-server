@@ -10,7 +10,8 @@ public class User {
 	private String password;
 	private String name;
 	private int accessLevel;
-	private Date timeCreated;
+	private Date creTime = new Date(System.currentTimeMillis());
+	private Date updTime = new Date(System.currentTimeMillis());
 
 	public User(long producerId, String username, String password, String name, int accessLevel) {
 		super();
@@ -70,12 +71,20 @@ public class User {
 		this.accessLevel = accessLevel;
 	}
 
-	public Date getTimeCreated() {
-		return timeCreated;
+	public Date getCreTime() {
+		return creTime;
 	}
 
-	public void setTimeCreated(Date timeCreated) {
-		this.timeCreated = timeCreated;
+	public void setCreTime(Date creTime) {
+		this.creTime = creTime;
+	}
+
+	public Date getUpdTime() {
+		return updTime;
+	}
+
+	public void setUpdTime(Date updTime) {
+		this.updTime = updTime;
 	}
 
 	public String toString() {

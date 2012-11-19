@@ -1,10 +1,12 @@
 package sw.server.models;
 
 public class Contact {
+	
 	private String name;
 	private String email;
 	private String phoneSMS;
 	private String phoneCall;
+	
 
 	public Contact(String name, String email, String phoneSMS, String phoneCall) {
 		this.name = name;

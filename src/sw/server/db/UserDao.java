@@ -3,6 +3,7 @@ package sw.server.db;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import sw.server.Logger;
 import sw.server.models.User;
@@ -14,7 +15,7 @@ public class UserDao extends Dao {
 		ResultSet rs = null;
 		int rows = 0;
 		try {
-			st = db.prepareStatement("INSERT INTO User (producer_id, username, password, name, access_level) VALUES (?, ?, ?, ?, ?)");
+			st = db.prepareStatement("INSERT INTO user (producer_id, username, password, name, access_level, cre_time, upd_time) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			setParams(user, st);
 			rows = st.executeUpdate();
 			rs = st.getGeneratedKeys();
@@ -28,6 +29,7 @@ public class UserDao extends Dao {
 		}
 		return rows;
 	}
+	
 	private void setParams(User user, PreparedStatement st) throws SQLException {
 		int i = 1;
 		st.setLong(i++, user.getProducerId());
@@ -35,6 +37,8 @@ public class UserDao extends Dao {
 		st.setString(i++, user.getPassword());
 		st.setString(i++, user.getName());
 		st.setInt(i++, user.getAccessLevel());
+		st.setTimestamp(i++, new Timestamp(user.getCreTime().getTime()));
+		st.setTimestamp(i++, new Timestamp(user.getCreTime().getTime()));
 	}
 	
 

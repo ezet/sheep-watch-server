@@ -1,6 +1,5 @@
 package sw.server.models;
 
-import java.util.Calendar;
 
 public class Message {
 	private final long id;
@@ -9,10 +8,10 @@ public class Message {
 	private final long timeSent;
 	private final int pulse;
 	private final double temperature;
-	private final long latitude;
-	private final long longitude;
+	private final double latitude;
+	private final double longitude;
 
-	public Message(long id, long rfid, int messageType, long longitude, long latitude, int pulse,
+	public Message(long id, long rfid, int messageType, double latitude, double longitude, int pulse,
 			double temperature) {
 		super();
 		this.id = id;
@@ -22,7 +21,7 @@ public class Message {
 		this.temperature = temperature;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.timeSent = Calendar.getInstance().getTimeInMillis();
+		this.timeSent = System.currentTimeMillis();
 	}
 
 	public long getId() {
@@ -49,11 +48,11 @@ public class Message {
 		return temperature;
 	}
 
-	public long getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public long getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
