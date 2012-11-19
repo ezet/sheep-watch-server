@@ -45,9 +45,8 @@ public class Server implements Runnable {
 	public void processMessage(Message message) {
 		if (message != null) {
 			Event event = new Event(message);
-			long sheepId = sheepDao.findByRfid(event.getRfid());
-			Sheep sheep = new Sheep();
-			event.setSheepId(sheepId);
+			Sheep sheep = sheepDao.findByRfid(event.getRfid());
+			event.setSheepId(sheep.getId());
 			eventDao.insert(event);
 			if (event.getMessageType() == MessageType.ALARM) {
 				List<Contact> contacts = contactDao.findByUserId(sheep.getUserId());

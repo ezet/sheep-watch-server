@@ -33,22 +33,37 @@ public class SheepDao extends Dao {
 			return rows;
 		}
 		
-		public long findByRfid(long rfid) {
+		public Sheep findByRfid(long rfid) {
 			PreparedStatement st = null;
 			ResultSet rs = null;
-			long id = -1;
+			Sheep sheep = null;
 			try {
 				st = db.prepareStatement("SELECT id FROM sheep WHERE rfid = " + rfid + ';');
 				rs = st.executeQuery();
 				if (rs.next()) {
-					id = rs.getLong("id");
+					sheep = createSheep(rs);
 				}
 			} catch (SQLException e) {
 				Logger.log(e);
 			} finally {
 				db.close(st, rs);
 			}
-			return id;
+			return sheep;
+		}
+		
+		private Sheep createSheep(ResultSet rs) throws SQLException {
+			Sheep sheep = new Sheep();
+			sheep.setId(rs.getLong("id"));
+			sheep.setSheepPid(rs.getLong("sheep_pid"));
+			sheep.setUserId(rs.getLong("user_id"));
+			sheep.setRfid(rs.getLong("rfid"));
+			sheep.setName(rs.getString("name"));
+			sheep.setBirthWeight(rs.getDouble("birth_weight"));
+			sheep.setDateOfBirth(rs.getTimestamp("date_of_birth"));
+			sheep.setNotes(rs.getString("notes"));
+			sheep.setCreTime(rs.getTimestamp("cre_time"));
+			sheep.setUpdTime(rs.getTimestamp("upd_time"));
+			return sheep;
 		}
 		
 		private void setParams(Sheep sheep, PreparedStatement st) throws SQLException {
