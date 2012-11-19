@@ -15,7 +15,6 @@ public class ContactDao extends Dao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		List<Contact> contacts = new ArrayList<Contact>();
-		long id = -1;
 		try {
 			st = db.prepareStatement("SELECT * FROM contact WHERE user_id = " + userId + ';');
 			rs = st.executeQuery();
@@ -24,7 +23,6 @@ public class ContactDao extends Dao {
 			}
 			if (rs.next()) {
 				contacts.add(getContact(rs));
-				id = rs.getLong("id");
 			}
 		} catch (SQLException e) {
 			Logger.log(e);

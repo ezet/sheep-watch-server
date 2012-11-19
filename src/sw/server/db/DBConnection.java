@@ -9,14 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import sw.server.Config;
 import sw.server.Logger;
 
 
 public class DBConnection {
 
-	private String dbAddress = "localhost/";
-	private String jdbcDriver = "jdbc:mysql://";
-	private String database = "larskrid_sw";
 	private Connection conn = null;
 	private Properties props = new Properties();
 
@@ -27,8 +25,8 @@ public class DBConnection {
 	}
 
 	public DBConnection() {
-		props.setProperty("user", "dev");
-		props.setProperty("password", "dev");
+		props.setProperty("user", Config.DB_USER);
+		props.setProperty("password", Config.DB_PASSWORD);
 	}
 
 
@@ -98,7 +96,7 @@ public class DBConnection {
 	private void connect() throws SQLException {
 		try {
 			if (conn == null || conn.isClosed()) {
-				conn = DriverManager.getConnection(jdbcDriver + dbAddress + database, props);
+				conn = DriverManager.getConnection(Config.JDBC_DRIVER + Config.DB_ADDRESS + Config.DB_NAME, props);
 			}
 		} catch (SQLException e) {
 			Logger.log("Cannot connect to db.");
