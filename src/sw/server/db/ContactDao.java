@@ -19,9 +19,6 @@ public class ContactDao extends Dao {
 			st = db.prepareStatement("SELECT * FROM contact WHERE user_id = " + userId + ';');
 			rs = st.executeQuery();
 			while (rs.next()) {
-
-			}
-			if (rs.next()) {
 				contacts.add(getContact(rs));
 			}
 		} catch (SQLException e) {

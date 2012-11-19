@@ -50,11 +50,12 @@ public class Server implements Runnable {
 			event.setSheepId(sheep.getId());
 			eventDao.insert(event);
 			if (event.getMessageType() == MessageType.ALARM) {
-				List<Contact> contacts = //contactDao.findByUserId(sheep.getUserId());
-										generateContacts();
+				List<Contact> contacts = contactDao.findByUserId(sheep.getUserId());
 				for (Contact contact: contacts) {
+					if (contact.isEmailAlert()) {
+						Logger.log("Sending mail to: " + contact.getEmail());
 					Email.send(contact.getName(), contact.getEmail(), sheep);
-				
+					}
 				}
 			} else {
 
