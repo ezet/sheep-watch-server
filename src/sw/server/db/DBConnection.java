@@ -49,7 +49,7 @@ public class DBConnection {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			Logger.log(e);
 			throw e;
 		}
