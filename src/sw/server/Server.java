@@ -1,5 +1,6 @@
 package sw.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sw.server.db.ContactDao;
@@ -49,14 +50,21 @@ public class Server implements Runnable {
 			event.setSheepId(sheep.getId());
 			eventDao.insert(event);
 			if (event.getMessageType() == MessageType.ALARM) {
-				List<Contact> contacts = contactDao.findByUserId(sheep.getUserId());
+				List<Contact> contacts = //contactDao.findByUserId(sheep.getUserId());
+										generateContacts();
 				for (Contact contact: contacts) {
-					
-					// contact em!!
+					Email.send(contact.getName(), contact.getEmail(), sheep);
+				
 				}
 			} else {
 
 			}
 		}
+	}
+	private ArrayList<Contact> generateContacts(){
+		ArrayList<Contact> list=new ArrayList<Contact>();
+		list.add(new Contact("Espen","espenhellerud5@gmail.com"));
+		
+		return list;
 	}
 }

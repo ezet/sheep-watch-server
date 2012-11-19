@@ -7,7 +7,7 @@ import sw.server.models.Message;
 
 public class MessageBuffer {
 
-	private volatile BlockingQueue<Message> buffer = new ArrayBlockingQueue<>(200);
+	private volatile BlockingQueue<Message> buffer = new ArrayBlockingQueue<Message>(200);
 
 	public Message take() {
 		Message message = null;

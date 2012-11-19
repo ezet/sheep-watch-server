@@ -24,8 +24,8 @@ public class ServerCLI {
 		simulator = new MessageSimulator(this, server.getBuffer());
 		startServer();
 		startSimulator();
-
-		try (Scanner scanner = new Scanner(System.in)) {
+		Scanner scanner = new Scanner(System.in);
+		try {
 			run = true;
 			while (run) {
 				prompt();
@@ -57,6 +57,8 @@ public class ServerCLI {
 				} else
 					System.out.println("invalid command, try 'help' for help.");
 			}
+		}catch(Exception e){
+			scanner.close();
 		}
 	}
 

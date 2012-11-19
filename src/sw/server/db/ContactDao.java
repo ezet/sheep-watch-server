@@ -14,7 +14,7 @@ public class ContactDao extends Dao {
 	public List<Contact> findByUserId(long userId) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		List<Contact> contacts = new ArrayList<>();
+		List<Contact> contacts = new ArrayList<Contact>();
 		long id = -1;
 		try {
 			st = db.prepareStatement("SELECT * FROM contact WHERE user_id = " + userId + ';');
