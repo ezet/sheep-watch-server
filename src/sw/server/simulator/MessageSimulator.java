@@ -27,7 +27,7 @@ public class MessageSimulator implements Runnable {
 	private long updateInterval;
 
 	public MessageSimulator(ServerCLI ui, MessageBuffer buffer) {
-		this.buffer = buffer;re
+		this.buffer = buffer;
 		this.ui = ui;
 	}
 
