@@ -96,7 +96,7 @@ public class DBConnection {
 	private void connect() throws SQLException {
 		try {
 			if (conn == null || conn.isClosed()) {
-				conn = DriverManager.getConnection(Config.JDBC_DRIVER + Config.DB_ADDRESS + Config.DB_NAME, props);
+				conn = DriverManager.getConnection(Config.JDBC_DRIVER + Config.DB_ADDRESS + "/" + Config.DB_NAME, props);
 			}
 		} catch (SQLException e) {
 			Logger.log("Cannot connect to db.");
