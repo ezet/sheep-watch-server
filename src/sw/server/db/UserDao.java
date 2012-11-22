@@ -8,16 +8,27 @@ import java.sql.Timestamp;
 import sw.server.Logger;
 import sw.server.models.User;
 
+/**
+ * Data Access Object for User models
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class UserDao extends Dao {
-	
-	public int insert(User user) {
+
+	/**
+	 * Inserts a new User
+	 * 
+	 * @param user The user to insert
+	 * @return The user that was insterted, with the new generated ID
+	 */
+	public User insert(User user) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		int rows = 0;
 		try {
 			st = db.prepareStatement("INSERT INTO user (producer_id, username, password, name, access_level, cre_time, upd_time) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			setParams(user, st);
-			rows = st.executeUpdate();
+			st.executeUpdate();
 			rs = st.getGeneratedKeys();
 			if (rs.next()) {
 				user.setId(rs.getInt(1));
@@ -27,9 +38,16 @@ public class UserDao extends Dao {
 		} finally {
 			db.close(st, rs);
 		}
-		return rows;
+		return user;
 	}
-	
+
+	/**
+	 * Maps a user to a PreparedStatement
+	 * 
+	 * @param user The user to map
+	 * @param st The statement to map to
+	 * @throws SQLException
+	 */
 	private void setParams(User user, PreparedStatement st) throws SQLException {
 		int i = 1;
 		st.setLong(i++, user.getProducerId());
@@ -40,6 +58,5 @@ public class UserDao extends Dao {
 		st.setTimestamp(i++, new Timestamp(user.getCreTime().getTime()));
 		st.setTimestamp(i++, new Timestamp(user.getCreTime().getTime()));
 	}
-	
 
 }

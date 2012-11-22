@@ -1,6 +1,5 @@
 package sw.server.db;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,18 +10,28 @@ import java.util.List;
 import sw.server.Logger;
 import sw.server.models.Contact;
 import sw.server.models.Event;
-import sw.server.models.Sheep;
 
+/**
+ * Data Access Object for Events
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class EventDao extends Dao {
-	
-	public int insert(Event event) {
+
+	/**
+	 * Inserts a new Event row in the database
+	 * 
+	 * @param event The event to insert
+	 * @return The event object that was inserted, with the generated ID
+	 */
+	public Event insert(Event event) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		int rows = 0;
 		try {
 			st = db.prepareStatement("INSERT INTO Event (sheep_id, time_sent, time_received, message_type, longitude, latitude, pulse, temperature, rfid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			setParams(event, st);
-			rows = st.executeUpdate();
+			st.executeUpdate();
 			rs = st.getGeneratedKeys();
 			if (rs.next()) {
 				event.setId(rs.getInt(1));
@@ -32,9 +41,16 @@ public class EventDao extends Dao {
 		} finally {
 			db.close(st, rs);
 		}
-		return rows;
+		return event;
 	}
-	
+
+	/**
+	 * Maps an event to a PrepatedStatement
+	 * 
+	 * @param event The event to map
+	 * @param st The statement to map to
+	 * @throws SQLException
+	 */
 	private void setParams(Event event, PreparedStatement st) throws SQLException {
 		int i = 1;
 		st.setLong(i++, event.getSheepId());
@@ -47,11 +63,5 @@ public class EventDao extends Dao {
 		st.setDouble(i++, event.getTemperature());
 		st.setLong(i++, event.getRfid());
 	}
-
-	
-	public List<Contact> getContacts(long id) {
-		return new ArrayList<Contact>();
-	}
-
 
 }

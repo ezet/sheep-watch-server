@@ -2,6 +2,12 @@ package sw.server.models;
 
 import java.util.Date;
 
+/**
+ * Contact model
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class Contact {
 
 	private long id;

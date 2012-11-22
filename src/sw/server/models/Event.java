@@ -2,17 +2,23 @@ package sw.server.models;
 
 import java.util.Date;
 
+/**
+ * Event model
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class Event {
 
 	public enum MessageType {
 		UPDATE(0), ALARM(1), EXCEPTION(2);
-		
+
 		public final int index;
-		
+
 		private MessageType(int n) {
 			index = n;
 		}
-		
+
 		public static MessageType valueOf(int n) {
 			MessageType type = null;
 			if (n == 0) {
@@ -29,7 +35,7 @@ public class Event {
 	public long id;
 
 	public long rfid;
-	
+
 	public long sheepId;
 
 	public MessageType messageType;
@@ -59,7 +65,7 @@ public class Event {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public long getSheepId() {
 		return sheepId;
 	}
@@ -139,8 +145,5 @@ public class Event {
 	public void setLongitude(long longitude) {
 		this.longitude = longitude;
 	}
-
-	
-	
 
 }

@@ -2,6 +2,12 @@ package sw.server.models;
 
 import java.util.Date;
 
+/**
+ * Sheep model
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class Sheep {
 
 	private long id;

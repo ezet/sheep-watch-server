@@ -1,6 +1,11 @@
 package sw.server.models;
 
-
+/**
+ * Message model
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class Message {
 	private final long id;
 	private final long rfid;
@@ -11,8 +16,7 @@ public class Message {
 	private final double latitude;
 	private final double longitude;
 
-	public Message(long id, long rfid, int messageType, double latitude, double longitude, int pulse,
-			double temperature) {
+	public Message(long id, long rfid, int messageType, double latitude, double longitude, int pulse, double temperature) {
 		super();
 		this.id = id;
 		this.rfid = rfid;

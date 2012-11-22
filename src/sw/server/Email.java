@@ -12,8 +12,21 @@ import javax.mail.internet.MimeMessage;
 
 import sw.server.models.Sheep;
 
+/**
+ * Sends email using google mails SMTP service
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class Email {
 
+	/**
+	 * Sends an email alert
+	 * 
+	 * @param username The username of the recipient
+	 * @param email The email of the recipient
+	 * @param sheep The model for the sheep that triggered the email alert
+	 */
 	public static void send(String username, String email, Sheep sheep) {
 
 		final String email1 = "sheepwatch@gmail.com";
@@ -41,6 +54,7 @@ public class Email {
 
 			Transport.send(message);
 		} catch (MessagingException e) {
+			Logger.debug(e);
 			throw new RuntimeException(e);
 		}
 	}

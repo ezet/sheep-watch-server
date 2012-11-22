@@ -2,6 +2,12 @@ package sw.server.models;
 
 import java.util.Date;
 
+/**
+ * User model
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class User {
 
 	private long id;
@@ -21,11 +27,10 @@ public class User {
 		this.name = name;
 		this.accessLevel = accessLevel;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
-
 
 	public void setId(long id) {
 		this.id = id;

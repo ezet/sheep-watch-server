@@ -9,8 +9,20 @@ import java.util.List;
 import sw.server.Logger;
 import sw.server.models.Contact;
 
+/**
+ * Database Access Object for Contacts
+ * 
+ * @author Lars Kristian
+ * 
+ */
 public class ContactDao extends Dao {
 
+	/**
+	 * Finds all contacts for a specific user id
+	 * 
+	 * @param userId The user ID
+	 * @return A list of contacts, or empty list if none are found
+	 */
 	public List<Contact> findByUserId(long userId) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -29,6 +41,13 @@ public class ContactDao extends Dao {
 		return contacts;
 	}
 
+	/**
+	 * Binds a ResultSet to a Contact model
+	 * 
+	 * @param rs The ResultSet to bind
+	 * @return The bound contact
+	 * @throws SQLException
+	 */
 	private Contact getContact(ResultSet rs) throws SQLException {
 		Contact contact = new Contact();
 		contact.setId(rs.getLong("id"));
