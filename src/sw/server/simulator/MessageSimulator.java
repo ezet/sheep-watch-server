@@ -121,7 +121,7 @@ public class MessageSimulator implements Runnable {
 	 */
 	public long UpdateInterval() {
 		if (Config.DAILY_UPDATES > 0) {
-			return 3600000 / ((Config.NUM_PRODUCERS * Config.NUM_SHEEP * Config.DAILY_UPDATES) / 24);
+			return 3600000 / ((Config.NUM_USERS * Config.NUM_SHEEP * Config.DAILY_UPDATES) / 24);
 		} else {
 			run = false;
 			return 0;
@@ -169,7 +169,7 @@ public class MessageSimulator implements Runnable {
 	private void generateInserts() {
 		UserDao userDao = new UserDao();
 		SheepDao sheepDao = new SheepDao();
-		for (int i = 1; i <= Config.NUM_PRODUCERS; ++i) {
+		for (int i = 1; i <= Config.NUM_USERS; ++i) {
 			User user = new User(i, Config.USER_PREFIX + "@" + i, Config.USER_PASSWORD, "name", 5);
 			userDao.insert(user);
 			for (int j = 1; j <= Config.NUM_SHEEP; ++j) {

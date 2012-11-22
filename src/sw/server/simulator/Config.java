@@ -19,9 +19,10 @@ public class Config {
 	public static String USER_PREFIX = "user";
 	public static String USER_PASSWORD = "pw";
 
-	public static int NUM_PRODUCERS = 1;
+	public static int NUM_USERS = 1;
 	public static int NUM_SHEEP = 1000;
 	public static int DAILY_UPDATES = 3;
+	public static int INITIAL_UPDATES = 20;
 
 	public static boolean DEBUG = false;
 
@@ -45,9 +46,10 @@ public class Config {
 		}
 		USER_PREFIX = props.getProperty("user_prefix");
 		USER_PASSWORD = props.getProperty("user_password");
-		NUM_PRODUCERS = Integer.valueOf(props.getProperty("num_producers"));
-		NUM_SHEEP = Integer.valueOf(props.getProperty("num_sheep"));
+		NUM_USERS = Integer.valueOf(props.getProperty("users"));
+		NUM_SHEEP = Integer.valueOf(props.getProperty("sheep"));
 		DAILY_UPDATES = Integer.valueOf(props.getProperty("daily_updates"));
+		INITIAL_UPDATES = Integer.valueOf(props.getProperty("initial_updates"));
 		LAT_MIN = Double.valueOf(props.getProperty("lat_min"));
 		LAT_MAX = Double.valueOf(props.getProperty("lat_max"));
 		LONG_MIN = Double.valueOf(props.getProperty("long_min"));
